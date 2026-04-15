@@ -13,11 +13,12 @@ public class LectorRuta {
 	   - Una ruta que no contenga archivos txt (No se si esa responsabilidad recae sobre esta clase o LectorArchivo, ya veremos)*/
 
     private File ruta;
+    private int numArchivos;
 
     /**
      * Constructor de File
      * @param El string que el usuario nos debe de pasar para crear la ruta
-     * @throws IllegalArgumentException si el string es null (No subestimar al usuario)
+     * @throws IllegalArgumentException si el string es null (No subestimar al usuario) o es string vacio
      */
     
     public LectorRuta(String nRuta) {
@@ -36,10 +37,22 @@ public class LectorRuta {
     public File getRuta() {
 	return this.ruta;
     }
+    public int getNumeroArchivos() {
+	return this.numArchivos;
+    }
+    public void setRuta(File oRuta) {
+	this.ruta = oRuta;
+    }
+    public void setNumArchivos(int nNum) {
+	this.numArchivos = nNum;
+    }
     
     /**
      * Este metodo es una combinacion de dos metodos .exists() y .isDirectory()
-     * con un retorno booleano. 
+     * con un retorno booleano.
+     *
+     * @return <code>true<code> si la ruta existe y es un directorio, <code>false<code>
+     * si no se cumple lo anterior.
      */
     
     public boolean esUsable() {
@@ -53,6 +66,8 @@ public class LectorRuta {
      * Este metodo para regresar un arreglo de Archivos que cumplen con la particularidad de ser .txt
      * La verdad estoy probando los lambdas, asi que no se si eso sea correcto
      * @param la ruta de donde se recabaran todos los archivos con el filtro
+     * @return un arreglo de archivos, si llegase a pasar que el arreglo fuera null, regresa un arreglo
+     * de tamano 0 (tambien lo hace si la ruta no tiene archivos .txt), en otro caso el arreglo tiene carnita.
      */
     
 
@@ -65,11 +80,22 @@ public class LectorRuta {
 
 	// Como tal, listFiles recibe un filtro de tipo FileFilter, entonces, aqui entra en accion el lambda
 	// (nombreArchivo -> es un archivo && nombreArchivo.minuscula.terminacon .txt)
-	File [] temp = ruta.listFiles(archivo -> archivo.isFile() && archivo.getName().toLowerCase().endsWith(".txt"));
+	File[] temp = ruta.listFiles(archivo -> archivo.isFile() && archivo.getName().toLowerCase().endsWith(".txt"));
 
 	if (temp == null)
 	    return new File[0];
 	return temp;
+    }
+
+    /**
+     * Metodo que nos regresa el tamano del arreglo de archivos, esto sera ocupado para la clase de pesos,
+     * ya que ocupamos el numero de archivos validos de la ruta.
+
+     * @return numero de archivos del arreglo
+
+     */
+    public int numeroArchivosValidos() {
+	return listadoDocs().length;
     }
     
 }

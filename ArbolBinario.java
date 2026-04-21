@@ -80,6 +80,7 @@ public abstract class ArbolBinario<T> {
 	}
     }
     
+    //Inicio de la clase del Árbol
     private Vertice raiz;
     private int elementos;
 

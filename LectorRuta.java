@@ -7,44 +7,45 @@ public class LectorRuta {
     /* Pense en esta clase como un punto de apoyo al iniciar el programa, es decir, cuando se inicia el programa,
      esta clase sera la encargada de pedir la ruta donde se alojan los archivos .txt que vamos a ocupar.
 
-    AHora bien, supongo que hay que blindarlo contra cosas como:
+    Ahora bien, supongo que hay que blindarlo contra cosas como:
            - Una ruta que no exista
 	   - Una ruta que no tenga nada (No esta mal pero no serviria de mucho)
-	   - Una ruta que no contenga archivos txt (No se si esa responsabilidad recae sobre esta clase o LectorArchivo, ya veremos)*/
+	   - Una ruta que no contenga archivos txt (No se si esa responsabilidad recae sobre esta clase o LectorArchivo, ya veremos)
+       */
 
     private File ruta;
     private int numArchivos;
 
     /**
      * Constructor de File
-     * @param El string que el usuario nos debe de pasar para crear la ruta
+     * @param nRuta string que el usuario nos debe de pasar para crear la ruta
      * @throws IllegalArgumentException si el string es null (No subestimar al usuario) o es string vacio
      */
     
     public LectorRuta(String nRuta) {
 
-	if (nRuta == null)
-	    throw new IllegalArgumentException("La ruta no pude ser null");
-	if(nRuta.isEmpty())
-	    throw new IllegalArgumentException("La ruta no pude ser vacia");
-	    
-	this.ruta = new File(nRuta);
+        if (nRuta == null)
+            throw new IllegalArgumentException("La ruta no pude ser null");
+        if(nRuta.isEmpty())
+            throw new IllegalArgumentException("La ruta no pude ser vacia");
+            
+        this.ruta = new File(nRuta);
     }
 
     /**
      * Getters de toda la vida
      */
     public File getRuta() {
-	return this.ruta;
+	    return this.ruta;
     }
     public int getNumeroArchivos() {
-	return this.numArchivos;
+	    return this.numArchivos;
     }
     public void setRuta(File oRuta) {
-	this.ruta = oRuta;
+	    this.ruta = oRuta;
     }
     public void setNumArchivos(int nNum) {
-	this.numArchivos = nNum;
+	    this.numArchivos = nNum;
     }
     
     /**
@@ -56,9 +57,9 @@ public class LectorRuta {
      */
     
     public boolean esUsable() {
-	if (!ruta.exists() ||  !ruta.isDirectory())
-	    return false;
-	return true;
+        if (!ruta.exists() ||  !ruta.isDirectory())
+            return false;
+        return true;
     }
 
     
@@ -72,19 +73,19 @@ public class LectorRuta {
     
 
     public File[] listadoDocs() {
-	// reusamos la validacion anterior para evitar problemas
-	if (!esUsable())
-	    return new File[0];
+        // reusamos la validacion anterior para evitar problemas
+        if (!esUsable())
+            return new File[0];
 
-	// Una lambda que recurre al metodo listFiles, el cual devuelve un arreglo de File[],
+        // Una lambda que recurre al metodo listFiles, el cual devuelve un arreglo de File[],
 
-	// Como tal, listFiles recibe un filtro de tipo FileFilter, entonces, aqui entra en accion el lambda
-	// (nombreArchivo -> es un archivo && nombreArchivo.minuscula.terminacon .txt)
-	File[] temp = ruta.listFiles(archivo -> archivo.isFile() && archivo.getName().toLowerCase().endsWith(".txt"));
+        // Como tal, listFiles recibe un filtro de tipo FileFilter, entonces, aqui entra en accion el lambda
+        // (nombreArchivo -> es un archivo && nombreArchivo.minuscula.terminacon .txt)
+        File[] temp = ruta.listFiles(archivo -> archivo.isFile() && archivo.getName().toLowerCase().endsWith(".txt"));
 
-	if (temp == null)
-	    return new File[0];
-	return temp;
+        if (temp == null)
+            return new File[0];
+        return temp;
     }
 
     /**
@@ -95,7 +96,6 @@ public class LectorRuta {
 
      */
     public int numeroArchivosValidos() {
-	return listadoDocs().length;
+	    return listadoDocs().length;
     }
-    
 }

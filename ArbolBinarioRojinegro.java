@@ -136,22 +136,34 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> {
     }
 
     /**
-     * Metodo privado que emula la introduccion de AB, donde los elementos 
+     * Metodo privado que emula la introduccion de ArbolOrdenado, donde los elementos 
      * menores o iguales van a a la izquierda y los mayores a la derecha 
      */
-    private void meteAB(VerticeRn dentro, VerticeRn mete){
-	if (esRaiz(dentro)) {
-	    raiz = mete;
+
+    public void agregaRn(T elemento) {
+    }
+    private void meteAB(VerticeRn dentro, T  mete) {
+	
+	if(mete.compareTo(dentro.get()) <= 0) {
+	    if (!dentro.hayIzquierdo()) {
+		VerticeRn vertice = new VerticeRn(mete);
+		vertice.padre = dentro;
+		dentro.izquierdo = ultimoAgregado = vertice;
+		
+	    } else {
+		meteAB(dentro.izquierdo(), mete);
+	    }
 	} else {
-	    if(dentro.get().compareTo(mete.get()) <= 0) {
-		if (!dentro.hayIzquierdo())
-		    dentro.izquierda = mete;
-		else
+	    if (!dentro.hayDerecho()) {
+		VerticeRn vertice = new VerticeRn(mete);
+		vertice.padre = dentro;
+		dentro.derecho = ultimoAgregado = vertice;
+	    } else {
+		meteAB(dentro.derecho(), mete);
 	    }
 	}
-	
-	
     }
+    
     private void rebalanceo()
 
     

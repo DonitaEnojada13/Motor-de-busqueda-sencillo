@@ -62,19 +62,19 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> {
      */
     public ArbolBinarioRojinegro() {}
     
-    public boolean esRaiz(Vertice vertice){
+    public boolean esRaiz(VerticeRn vertice){
         return vertice == raiz;
     }
 
     public boolean esHijoIzquierdo(VerticeRn a) {
-	if (a == null || !a.hayPadre())
-	    return false;
-	return a.padre().izquierdo() == a;
+		if (a == null || !a.hayPadre())
+			return false;
+		return a.padre().izquierdo() == a;
     }
     public boolean esHijoDerecho(VerticeRn b) {
-	if (b == null || !b.hayPadre())
-	    return false;
-	return b.padre().derecho() == b;
+		if (b == null || !b.hayPadre())
+			return false;
+		return b.padre().derecho() == b;
     }
 
     private boolean esHoja(VerticeRn vertice){
@@ -91,48 +91,48 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> {
 
     public void giroD(VerticeRn q) {
 
-	if(q == null || !q.hayIzquierdo())
-	    return;
-	
-	VerticeRn p = q.izquierdo();
-	p.padre = q.padre();
+		if(q == null || !q.hayIzquierdo())
+			return;
+		
+		VerticeRn p = q.izquierdo();
+		p.padre = q.padre();
 
-	if (q.hayPadre()) {
-	    if (esHijoIzquierdo(q))
-		q.padre().izquierdo = p;
-	    else
-		q.padre().derecho = p;	
-	} else {
-	    raiz = p;
-	}
-	
-	q.izquierdo = p.derecho();
-	if (p.hayDerecho())
-	    p.derecho().padre = q;
-	
-	p.derecho = q;
-	q.padre = p;
+		if (q.hayPadre()) {
+			if (esHijoIzquierdo(q))
+			q.padre().izquierdo = p;
+			else
+			q.padre().derecho = p;	
+		} else {
+			raiz = p;
+		}
+		
+		q.izquierdo = p.derecho();
+		if (p.hayDerecho())
+			p.derecho().padre = q;
+		
+		p.derecho = q;
+		q.padre = p;
     }
 
     public void giroI(VerticeRn p) {
-	if (p == null || !p.hayDerecho())
-	    return;
-	VerticeRn q = p.derecho();
-	q.padre = p.padre();
+		if (p == null || !p.hayDerecho())
+			return;
+		VerticeRn q = p.derecho();
+		q.padre = p.padre();
 
-	if(p.hayPadre()) {
-	    if (esHijoDerecho(p))
-		p.padre().derecho = q;
-	    else
-		p.padre().izquierdo = q;
-	} else {
-	    raiz = q;
-	}
-	p.derecho = q.izquierdo();
-	if(p.hayDerecho())
-	    p.derecho().padre = p;
-	q.izquierdo = p;
-	p.padre = q;
+		if(p.hayPadre()) {
+			if (esHijoDerecho(p))
+			p.padre().derecho = q;
+			else
+			p.padre().izquierdo = q;
+		} else {
+			raiz = q;
+		}
+		p.derecho = q.izquierdo();
+		if(p.hayDerecho())
+			p.derecho().padre = p;
+		q.izquierdo = p;
+		p.padre = q;
     }
 
     /**
@@ -141,30 +141,33 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> {
      */
 
     public void agregaRn(T elemento) {
+
     }
     private void meteAB(VerticeRn dentro, T  mete) {
 	
-	if(mete.compareTo(dentro.get()) <= 0) {
-	    if (!dentro.hayIzquierdo()) {
-		VerticeRn vertice = new VerticeRn(mete);
-		vertice.padre = dentro;
-		dentro.izquierdo = ultimoAgregado = vertice;
-		
-	    } else {
-		meteAB(dentro.izquierdo(), mete);
-	    }
-	} else {
-	    if (!dentro.hayDerecho()) {
-		VerticeRn vertice = new VerticeRn(mete);
-		vertice.padre = dentro;
-		dentro.derecho = ultimoAgregado = vertice;
-	    } else {
-		meteAB(dentro.derecho(), mete);
-	    }
-	}
+		if(mete.compareTo(dentro.get()) <= 0) {
+			if (!dentro.hayIzquierdo()) {
+			VerticeRn vertice = new VerticeRn(mete);
+			vertice.padre = dentro;
+			dentro.izquierdo = ultimoAgregado = vertice;
+			
+			} else {
+			meteAB(dentro.izquierdo(), mete);
+			}
+		} else {
+			if (!dentro.hayDerecho()) {
+			VerticeRn vertice = new VerticeRn(mete);
+			vertice.padre = dentro;
+			dentro.derecho = ultimoAgregado = vertice;
+			} else {
+			meteAB(dentro.derecho(), mete);
+			}
+		}
     }
     
-    private void rebalanceo()
+    private void rebalanceo(){
+
+	}
 
     
 }

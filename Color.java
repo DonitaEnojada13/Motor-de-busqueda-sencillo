@@ -1,4 +1,4 @@
-public class enum Color {
+public enum Color {
     NINGUNO,
 	ROJO,
 	NEGRO

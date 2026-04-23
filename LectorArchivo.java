@@ -14,7 +14,6 @@ public class LectorArchivo {
     equalsIgnoreCase() (Creo que es ese) para poder detectar las peculiaridades del texto.
     
     */
-
-    private LectorArchivo archivoActual;
+    private File archivoActual;
     
 }

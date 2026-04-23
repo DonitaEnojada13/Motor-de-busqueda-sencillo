@@ -15,5 +15,9 @@ public class LectorArchivo {
     
     */
     private File archivoActual;
+
+    /*
+    * Entonces aquí tenemos 
+    */
     
 }

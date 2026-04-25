@@ -16,22 +16,29 @@ public class LectorArchivo {
     equalsIgnoreCase() (Creo que es ese) para poder detectar las peculiaridades del texto.
     
     */
-    private File archivoActual;
 
-    public ArbolBinarioRojinegro<String> agregaPalabras(File textoAgregar){
-        ArbolBinarioRojinegro <String> organizarPalabras = new ArbolBinarioRojinegro<>();
+    public void leerArchivo(File archivo,  ArbolBinarioRojinegro<String> a){
 
-        try(BufferedReader rd = new BufferedReader(new FileReader(textoAgregar))){
-            String palabra;
-            while((palabra = rd.readLine()) != null){
-                organizarPalabras.agregaRn(palabra.trim());
+        //Esto es lo que vamos a cambiar porque esta mal lol 
+        try(BufferedReader br = new BufferedReader(new FileReader(archivo)))){
+            String lineaActual;
+            while((lineaActual = br.readLine()) != null){
+                String lineaSinEspeciales = lineaActual.replaceAll("[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]", "");
+
+                lineaSinEspeciales = lineaSinEspeciales.trim();
+
+                if(!lineaSinEspeciales.isEmpty()){
+                    String[] palabras = lineaSinEspeciales.split("\\s+");
+
+                    for(String palabra : palabras){
+                        a.agregaRn(palabra);
+                    }
+                }
             }
-
         }catch(IOException e){
-            e.printStackTrace();
+            System.err.println("Error en: " + e.getMessage());
         }
 
-        return organizarPalabras;
     }
     
 }

@@ -177,13 +177,6 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> {
 			}
 		}
     }
-<<<<<<< HEAD
-    
-    private void rebalanceo(){
-
-	}
-=======
->>>>>>> bfa1738 (Metodo agrega Rojinegro)
 
     private void rebalanceoMete(VerticeRn a) {
 

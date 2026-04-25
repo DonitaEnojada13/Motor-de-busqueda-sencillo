@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileFilter;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class LectorArchivo {
     //TO DO
@@ -16,8 +18,20 @@ public class LectorArchivo {
     */
     private File archivoActual;
 
-    /*
-    * Entonces aquí tenemos 
-    */
+    public ArbolBinarioRojinegro agregaPalabras(File textoAgregar){
+        ArbolBinarioRojinegro <String> organizarPalabras = new ArbolBinarioRojinegro<>();
+
+        try(BufferedReader rd = new BufferedReader(new FileReader(textoAgregar))){
+            String palabra;
+            while((palabra = br.readLine()) != null){
+                organizarPalabras.agregaRn(palabra.trim());
+            }
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return organizarPalabras;
+    }
     
 }

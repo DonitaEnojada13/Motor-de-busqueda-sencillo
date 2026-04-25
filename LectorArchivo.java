@@ -17,6 +17,7 @@ public class LectorArchivo {
     equalsIgnoreCase() (Creo que es ese) para poder detectar las peculiaridades del texto.
     
     */
+    private File archivoActual;
 
     public void leerArchivo(File archivo,  ArbolBinarioRojinegro<String> a){
 

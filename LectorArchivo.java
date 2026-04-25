@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.text.Normalizer;
 import java.io.IOException;
 
-public class LectorArchivo {
+public class LectorArchivo implements ProcesadorPalabras{
     //TO DO
 
     /* Este es el molde de una clase que permita la lectura de archivos de texto plano .txt,
@@ -41,7 +41,7 @@ public class LectorArchivo {
 			// cositas
 			}
 	    }
-	} catch (IOExceptio e) {
+	} catch (IOException e) {
 	    System.err.println("Error al leer el archivo: " + e.getMessage());
 	}
     }
@@ -83,4 +83,7 @@ public class LectorArchivo {
 	return stb.toString();
     }
     
+    public void recibir(String p){
+        
+    }
 }

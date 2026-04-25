@@ -18,12 +18,12 @@ public class LectorArchivo {
     */
     private File archivoActual;
 
-    public ArbolBinarioRojinegro agregaPalabras(File textoAgregar){
+    public ArbolBinarioRojinegro<String> agregaPalabras(File textoAgregar){
         ArbolBinarioRojinegro <String> organizarPalabras = new ArbolBinarioRojinegro<>();
 
         try(BufferedReader rd = new BufferedReader(new FileReader(textoAgregar))){
             String palabra;
-            while((palabra = br.readLine()) != null){
+            while((palabra = rd.readLine()) != null){
                 organizarPalabras.agregaRn(palabra.trim());
             }
 

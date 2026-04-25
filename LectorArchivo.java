@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.text.Normalizer;
 import java.io.IOException;
 
 public class LectorArchivo {
@@ -20,7 +21,7 @@ public class LectorArchivo {
     public void leerArchivo(File archivo,  ArbolBinarioRojinegro<String> a){
 
         //Esto es lo que vamos a cambiar porque esta mal lol 
-        try(BufferedReader br = new BufferedReader(new FileReader(archivo)))){
+        try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
             String lineaActual;
             while((lineaActual = br.readLine()) != null){
                 String lineaSinEspeciales = lineaActual.replaceAll("[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]", "");
@@ -39,6 +40,43 @@ public class LectorArchivo {
             System.err.println("Error en: " + e.getMessage());
         }
 
+    }
+
+    /**
+     * Metodo privado para poder evitar letras con acentos o 
+     * cosas raras. No los puedo poner poque no se como ponerlos en
+     * mi lap
+     * @param String de entrada por normalizar
+     * @return String normalizado sin acentos y minus/mayus
+     */
+    private String normalizador(String s) {
+	if (s == null)
+	    return "";
+	// Instancia de clase Normalizer
+	// metodo normalizar (Recibe el String, el tipo de normalizacion)
+	// Investigando vi que hay una separacion entre NFC Y NFD, pero creo que NFD
+	// es mas util para el proyecto, ya que separa las palabaras, es decir
+	// Héctor  =>  H + e + ´ + c + t + o + r
+	String sPrima = Normalizer.normalize(s, Normalizer.Form.NFD);
+	
+	StringBuilder stb = new StringBuilder();
+	
+	for(int i = 0; i < sPrima.length(); i++) {
+	    char c = sPrima.charAt(i);
+	    // Wrapper de Caracter para ver si es letra/numero o espacio
+	    // Aqui se hace el descarte de manera directa
+
+	    // SI la palabra fuera Jaimito111_pro, lo descompone en
+	    // jaimito111pro, pero hay que ver si lo dejamos todo junto o hacemos que agregue un espacio
+	    // jaimito111 pro,mmmmmmmmmmm
+	    if(Character.isLetterOrDigit(c) || Character.isWhitespace(c))
+		stb.append(Character.toLowerCase(c));
+	    // para meterle un espacio y tener jaimito111 pro, mas palabras pero creo que funciona
+
+	    // ***Ver que hacer si tenemos "Hola /mundo" == "hola  mundo" dos espacios?
+	    else stb.append(' ');
+	}
+	return stb.toString();
     }
     
 }

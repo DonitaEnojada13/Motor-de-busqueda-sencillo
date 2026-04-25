@@ -19,30 +19,33 @@ public class LectorArchivo {
     */
     private File archivoActual;
 
-    public void leerArchivo(File archivo,  ArbolBinarioRojinegro<String> a){
+    public void leerArchivo(File archivo){
 
         //Esto es lo que vamos a cambiar porque esta mal lol 
         try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
+	    
             String lineaActual;
+	    
             while((lineaActual = br.readLine()) != null){
-                String lineaSinEspeciales = lineaActual.replaceAll("[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]", "");
+                String lineaLimpia = normalizador(lineaActual);
 
-                lineaSinEspeciales = lineaSinEspeciales.trim();
+		// "\\s+" De acuerdo con Class Pattern, se tiene que
+		// "\\s" un espcio en blanco
+		// "\\s+" uno o mas espacios en blancos
 
-                if(!lineaSinEspeciales.isEmpty()){
-                    String[] palabras = lineaSinEspeciales.split("\\s+");
+		// Se crea un areglo de String que muere al terminar este ciclo, bye bye popo
+		String[] palabras = lineaLimpia.trim().split("\\s+");
 
-                    for(String palabra : palabras){
-                        a.agregaRn(palabra);
-                    }
-                }
-            }
-        }catch(IOException e){
-            System.err.println("Error en: " + e.getMessage());
-        }
-
+		for(String palabra: palabras) {
+		    if (!palabra.isEmpty() || palabra != null)
+			// cositas
+			}
+	    }
+	} catch (IOExceptio e) {
+	    System.err.println("Error al leer el archivo: " + e.getMessage());
+	}
     }
-
+    
     /**
      * Metodo privado para poder evitar letras con acentos o 
      * cosas raras. No los puedo poner poque no se como ponerlos en

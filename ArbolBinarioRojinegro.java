@@ -1,3 +1,4 @@
+import java.io.File;
 public class ArbolBinarioRojinegro<T extends Comparable<T>> {
 
     // La logica de esto es la siguiente
@@ -12,15 +13,15 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> {
     // Nodo 2 archivo Profe_paseme_porfavor.txt con 6 repeicoines
    
     private class Conteo {
-	public File documento;
-	public aparicion;
-	
-	public Conteo(File archivo) {
-	    if (archivo == null || !archivo.isFile())
-		throw new IllegalArgumentException("Hay algo malo con el archivo");
-	    this.archivo = archivo;
-	    this.aparicion = 1; // se inicializa con 1 para evitar problemas con el peso igual a 0
-	    // y no tener log(0) = oo
+		public File documento;
+		public int aparicion;
+		
+		public Conteo(File archivo) {
+			if (archivo == null || !archivo.isFile())
+			throw new IllegalArgumentException("Hay algo malo con el archivo");
+			this.documento = archivo;
+			this.aparicion = 1; // se inicializa con 1 para evitar problemas con el peso igual a 0
+			// y no tener log(0) = oo
 	}
     }
 

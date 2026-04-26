@@ -1,9 +1,36 @@
 public class ArbolBinarioRojinegro<T extends Comparable<T>> {
 
+    // La logica de esto es la siguiente
+    // Clase interna de ABRN, llamada conteo
+    // Conteo posee el tipo de Documento que estamos analizando
+    // Y un int que nos dice cuantas veces se repite la palabra en ese docuemnto
+    // Se usara una lista ligada en cada nodo para hecr una sinergia
+    // Es decir
+    // El vertice del arbol Binario RN tiene una palabra y una lista ligada
+    // Ejemplo vertice con palabara Hola y lista con:
+    // Nodo 1 corresponde al archivo hola.txt y sus repeticiones (2 veces hola en el archivo)
+    // Nodo 2 archivo Profe_paseme_porfavor.txt con 6 repeicoines
+   
+    private class Conteo {
+	public File documento;
+	public aparicion;
+	
+	public Conteo(File archivo) {
+	    if (archivo == null || !archivo.isFile())
+		throw new IllegalArgumentException("Hay algo malo con el archivo");
+	    this.archivo = archivo;
+	    this.aparicion = 1; // se inicializa con 1 para evitar problemas con el peso igual a 0
+	    // y no tener log(0) = oo
+	}
+    }
+
+    
+
     private class VerticeRn {
 	
 	public T elemento;
 	public Color color;
+	// public ListaLIgada<Conteo> archivos; 
 	
 	public VerticeRn padre;
 	public VerticeRn izquierdo;

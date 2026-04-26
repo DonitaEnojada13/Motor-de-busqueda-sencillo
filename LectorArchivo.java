@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.text.Normalizer;
 import java.io.IOException;
 
-public class LectorArchivo implements ProcesadorPalabras{
+public class LectorArchivo {
     //TO DO
 
     /* Este es el molde de una clase que permita la lectura de archivos de texto plano .txt,
@@ -19,7 +19,10 @@ public class LectorArchivo implements ProcesadorPalabras{
     */
     private File archivoActual;
 
-    public void leerArchivo(File archivo){
+    public void leerArchivo(File archivo, ){
+	if (archivo == null || archivo.exists())
+	    System.err.println("Archivo no valido o null");
+            return;
 
         //Esto es lo que vamos a cambiar porque esta mal lol 
         try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
@@ -37,7 +40,7 @@ public class LectorArchivo implements ProcesadorPalabras{
 		String[] palabras = lineaLimpia.trim().split("\\s+");
 
 		for(String palabra: palabras) {
-		    if (!palabra.isEmpty() || palabra != null)
+		    if (palabra != null && !palabra.isEmpty())
 			// cositas
 			}
 	    }

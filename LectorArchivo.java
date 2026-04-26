@@ -41,7 +41,6 @@ public class LectorArchivo {
 
                     for(String palabra: palabras) {
                         if (palabra != null && !palabra.isEmpty()){
-                        // cositas
                         }
                     }
                 }
@@ -87,8 +86,5 @@ public class LectorArchivo {
         }
         return stb.toString();
     }
-    
-    public void recibir(String p){
-        
-    }
+
 }

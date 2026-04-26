@@ -1,5 +1,5 @@
 import java.io.File;
-public class ArbolBinarioRojinegro<T extends Comparable<T>> {
+public class ArbolBinarioRojinegro<T extends Comparable<T>> implements ProcesadorPalabras{
 
     // La logica de esto es la siguiente
     // Clase interna de ABRN, llamada conteo
@@ -25,7 +25,10 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> {
 	}
     }
 
-    
+    //Aquí vamos a agregar lo de la interface, esto lo haces Héctor xd 
+	public void recibir(String p){
+		
+	}
 
     private class VerticeRn {
 	

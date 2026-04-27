@@ -19,35 +19,34 @@ public class LectorArchivo {
     */
     private File archivoActual;
 
-    public void leerArchivo(File archivo, ProcesadorPalabras procesador){
-        if (archivo == null || !archivo.exists()){
+    public void leerArchivo(File archivo){
+        if (archivo == null || archivo.exists()){
             System.err.println("Archivo no valido o null");
             return;
         }
-	procesador.setArchivoActual(archivo);
-            //Esto es lo que vamos a cambiar porque esta mal lol 
-            try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
+	//Esto es lo que vamos a cambiar porque esta mal lol 
+	try(BufferedReader br = new BufferedReader(new FileReader(archivo))){
+	    
+	    String lineaActual;
             
-                String lineaActual;
-            
-                while((lineaActual = br.readLine()) != null){
-                    String lineaLimpia = normalizador(lineaActual);
-
+	    while((lineaActual = br.readLine()) != null){
+		String lineaLimpia = normalizador(lineaActual);
+		
                 // "\\s+" De acuerdo con Class Pattern, se tiene que
                 // "\\s" un espcio en blanco
                 // "\\s+" uno o mas espacios en blancos
-
+		
                 // Se crea un areglo de String que muere al terminar este ciclo, bye bye popo
                 String[] palabras = lineaLimpia.trim().split("\\s+");
-
-                    for(String palabra: palabras) {
-                        if (palabra != null && !palabra.isEmpty()){
-			    procesador.recibir(palabra);
-                        }
-                    }
-                }
-        
-            } catch (IOException e) {
+		
+		for(String palabra: palabras) {
+		    if (palabra != null && !palabra.isEmpty()){
+			procesador.recibir(palabra);
+		    }
+		}
+	    }
+	    
+	} catch (IOException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
     }

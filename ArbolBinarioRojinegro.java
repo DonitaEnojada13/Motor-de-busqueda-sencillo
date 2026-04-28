@@ -64,6 +64,10 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> implements Procesado
 	 * Metodos para ahorrar dolores de cabeza y  
 	 * ser usados posteriormente
 	 */
+
+	public ListaLigada<Conteo> getArchivos() {
+	    return this.archivos;
+	}
 	
 	public boolean hayPadre() {
 	    return padre != null;
@@ -208,6 +212,18 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> implements Procesado
             meteAB(raiz, elemento);
         elementos++;
     }
+    /**
+     * Método público para que el Controlador busque una palabra.
+     * @param elemento La palabra a buscar.
+     * @return El vertice que contiene la palabra y su lista de archivos, 
+     * o null en otro caso
+     */
+    public VerticeRn busca(T elemento) {
+	if (elemento == null)
+	    return null;
+	return busca(raiz, elemento); // Llama a tu método privado recursivo
+    }
+    
     private VerticeRn busca(VerticeRn a, T elem) {
 	if (elem == null)
 	    throw new IllegalArgumentException("No puedo ver null, mamaguevo");

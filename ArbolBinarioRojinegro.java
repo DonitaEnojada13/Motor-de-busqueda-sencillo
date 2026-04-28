@@ -29,7 +29,10 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> implements Procesado
 		return true;
 	    if (o == null || getClass() != o.getClass())
 		return false;
+
+		@SuppressWarnings("unchecked")
 	    Conteo otro = (Conteo) o;
+
 	    return this.documento.equals(otro.documento);
 	}
 	
@@ -125,18 +128,6 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> implements Procesado
 	return b.padre().derecho() == b;
     }
     
-    private boolean esHoja(VerticeRn vertice){
-        return !vertice.hayDerecho() && !vertice.hayIzquierdo();
-    }
-    
-    private boolean soloTieneUnHijo(VerticeRn vertice){
-        return !vertice.hayDerecho() && vertice.hayIzquierdo() || vertice.hayDerecho() && !vertice.hayIzquierdo() ;
-    }
-    
-    private boolean tieneAmbosHijos(VerticeRn vertice){
-        return vertice.hayDerecho() && vertice.hayIzquierdo();
-    }
-    
     public void giroD(VerticeRn q) {
 	
 	if(q == null || !q.hayIzquierdo())
@@ -183,6 +174,7 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> implements Procesado
 	p.padre = q;
     }
     
+	@SuppressWarnings("unchecked")
     public void recibir(String s) {
 	if (s == null || s.isEmpty())
 	    return;

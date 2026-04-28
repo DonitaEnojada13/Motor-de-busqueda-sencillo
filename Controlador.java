@@ -22,56 +22,56 @@ public class Controlador {
     }
 
     public void preparaRuta(String rutaRecibida) {
-	LectorRuta lectorRuta = new LectorRuta(rutaRecibida);
-	if (lectorRuta.esUsable()) {
-	    File[] archivos = lectorRuta.listadoDocs();
-	    
-	    System.out.println("Preparando la cantidad de " + archivos.length + " archivos");
-	    
-	    for (File f : archivos) {
-		lector.leerArchivo(f, indice);
-	    }
-	    System.out.println("Archivos procesados de manera exitosa");
-	} else {
-	    System.err.println("La ruta no es valida o no es un directorio");
-	}
+        LectorRuta lectorRuta = new LectorRuta(rutaRecibida);
+        if (lectorRuta.esUsable()) {
+            File[] archivos = lectorRuta.listadoDocs();
+            
+            System.out.println("Preparando la cantidad de " + archivos.length + " archivos");
+            
+            for (File f : archivos) {
+            lector.leerArchivo(f, indice);
+            }
+            System.out.println("Archivos procesados de manera exitosa");
+        } else {
+            System.err.println("La ruta no es valida o no es un directorio");
+        }
     }
 	
     /////// Faltan cosas no se si esten bien
     public void empiezaBusqueda() {
-	// El string para ir buscando, pero despues de la normalizacion y limpieza
-	String s = recibeConsulta();
+        // El string para ir buscando, pero despues de la normalizacion y limpieza
+        String s = recibeConsulta();
 
-	// Separamos el string en un arreglo de palabaras, spearando por espacios en
-	// blanco => Adrian/Pro/Gamer => [Adrian, Pro, Gamer] 
-	String[] palabras = s.split("\\s+");
+        // Separamos el string en un arreglo de palabaras, spearando por espacios en
+        // blanco => Adrian/Pro/Gamer => [Adrian, Pro, Gamer] 
+        String[] palabras = s.split("\\s+");
 
-	for (String p : palabras) {
+        for (String p : palabras) {
             if (!p.isEmpty()) {
-		// Este es un consejo que me dio el profe para que vean que se esta buscando
-		// la palabra ya limpia, si el usuario mete "*&^%&**Hola", se impirimira
-		// Buscando: "hola", porque asi depura el metodo normalizar
-		System.out.println("Buscando: " + p);
+            // Este es un consejo que me dio el profe para que vean que se esta buscando
+            // la palabra ya limpia, si el usuario mete "*&^%&**Hola", se impirimira
+            // Buscando: "hola", porque asi depura el metodo normalizar
+                System.out.println("Buscando: " + p);
 
-		// cositas
-	    }
-	}
+            // cositas
+            }
+        }
 	
     }
     
     public String recibeConsulta() {
-	String consulta = "";
+        String consulta = "";
 
-	// Mientras el nombre sea vacio que se haga esta accion
-	while(consulta.isEmpty()){    
-	    System.out.println("Ingresa el tu consulta");
-	    consulta  = sc.nextLine().trim();
-	    
-	    if(consulta.isEmpty()){
-		System.out.println("Aqui no aceptamos consultas vacias, bobo");
-	    }
-	}
-	return normalizarC(consulta);
+        // Mientras el nombre sea vacio que se haga esta accion
+        while(consulta.isEmpty()){    
+            System.out.println("Ingresa el tu consulta");
+            consulta  = sc.nextLine().trim();
+            
+            if(consulta.isEmpty()){
+            System.out.println("Aqui no aceptamos consultas vacias, bobo");
+            }
+        }
+        return normalizarC(consulta);
     }
 
 
@@ -102,7 +102,7 @@ public class Controlador {
             // jaimito111pro, pero hay que ver si lo dejamos todo junto o hacemos que agregue un espacio
             // jaimito111 pro,mmmmmmmmmmm
             if(Character.isLetterOrDigit(c) || Character.isWhitespace(c))
-		stb.append(Character.toLowerCase(c));
+		    stb.append(Character.toLowerCase(c));
             // para meterle un espacio y tener jaimito111 pro, mas palabras pero creo que funciona
 	    
             // ***Ver que hacer si tenemos "Hola /mundo" == "hola  mundo" dos espacios?

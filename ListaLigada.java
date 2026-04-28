@@ -26,9 +26,6 @@ public class ListaLigada<T> implements Iterable<T>{
             return elemento;
         }
 
-        public void setElemento(T elemento){
-            this.elemento = elemento;
-        }
     }
 
     private Nodo cabeza, rabo;

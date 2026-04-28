@@ -17,8 +17,6 @@ public class LectorArchivo {
     equalsIgnoreCase() (Creo que es ese) para poder detectar las peculiaridades del texto.
     
     */
-    private File archivoActual;
-
     public void leerArchivo(File archivo, ProcesadorPalabras procesador){
         if (archivo == null || !archivo.exists()){
             System.err.println("Archivo no valido o null");

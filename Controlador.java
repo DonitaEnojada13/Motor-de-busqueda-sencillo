@@ -21,6 +21,7 @@ public class Controlador {
         this.lector = new LectorArchivo();
     }
 
+    
     public void preparaRuta(String rutaRecibida) {
         LectorRuta lectorRuta = new LectorRuta(rutaRecibida);
         if (lectorRuta.esUsable()) {
@@ -58,13 +59,32 @@ public class Controlador {
         }
 	
     }
+
+    public String recibeRuta() {
+	String ruta = "";
+
+	while(ruta.isEmpty()) {
+	    System.out.println("Ingresa la ruta que deseas");
+            ruta = sc.nextLine().trim();
+	    if (ruta.isEmpty()) {
+		System.out.println("Aqui no aceptamos rutas vacias, bobo");
+	    } else {
+		LectorRuta checarR = new LectorRuta(ruta);
+		if (!checarR.esUsable()) {
+		    System.out.println("Ruta inexistente o no es carpeta. Intenta de nuevo");
+		    ruta = "";
+		}
+	    }
+	}
+	return ruta;
+    }
     
     public String recibeConsulta() {
         String consulta = "";
 
         // Mientras el nombre sea vacio que se haga esta accion
-        while(consulta.isEmpty()){    
-            System.out.println("Ingresa el tu consulta");
+        while(consulta.isEmpty()) {    
+            System.out.println("Ingresa tu consulta");
             consulta  = sc.nextLine().trim();
             
             if(consulta.isEmpty()){

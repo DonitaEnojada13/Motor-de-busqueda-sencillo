@@ -11,7 +11,7 @@ public class Peso {
 
     public double calcularIDF(int totalDocs, int relativoDocs) {
 	if (totalDocs > 0 && relativoDocs > 0)
-	    return log2((double)(totalDocs + 1)/relativosDocs);
+	    return log2((double)(totalDocs + 1)/relativoDocs);
 	return 0.0;
     }
     public double calcularPeso(double tf, double idf) {

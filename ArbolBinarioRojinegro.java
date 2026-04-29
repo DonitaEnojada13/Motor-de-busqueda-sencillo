@@ -64,10 +64,6 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> implements Procesado
 	 * Metodos para ahorrar dolores de cabeza y  
 	 * ser usados posteriormente
 	 */
-
-	public ListaLigada<Conteo> getArchivos() {
-	    return this.archivos;
-	}
 	
 	public boolean hayPadre() {
 	    return padre != null;
@@ -107,6 +103,21 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> implements Procesado
     private File archivoActual;
     private int elementos;
     
+	//Aquí va a haber un método que pueda acceder desde la clase filtro para que se mantenga todo lo de la POO ok? :p
+	public ListaLigada<FrecuenciaPalabra> obtenerRepeticiones(T elemento){
+		VerticeRn nodo = busca(raiz, elemento);
+
+		if(nodo == null) return null;
+
+		ListaLigada<FrecuenciaPalabra> listaConDatos = new ListaLigada<>();
+
+		for(Conteo c : nodo.archivos){
+			listaConDatos.agregarFinal(new FrecuenciaPalabra(c.documento, c.aparicion));
+		}
+
+		return listaConDatos;
+	}
+
     // metodo agregado de emergencia, para que la clase lista sepa que agregar
     public void setArchivoActual(File archivo) {
 	this.archivoActual = archivo;

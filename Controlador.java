@@ -7,6 +7,8 @@ public class Controlador {
     private Scanner sc;
     private ArbolBinarioRojinegro<String> indice;
     private LectorArchivo lector;
+    private Filtro filtro;
+    private int totalArchivos;
 
     /**
      * Metodo para recibir el string de la
@@ -19,18 +21,22 @@ public class Controlador {
         this.sc = new Scanner(System.in);
         this.indice = new ArbolBinarioRojinegro<>();
         this.lector = new LectorArchivo();
+	this.filtro = new Filtro();
+	this.totalArchivos = 0;
+	
     }
-
     
     public void preparaRuta(String rutaRecibida) {
         LectorRuta lectorRuta = new LectorRuta(rutaRecibida);
+	
         if (lectorRuta.esUsable()) {
             File[] archivos = lectorRuta.listadoDocs();
+	    totalArchivos = archivos.length;
             
             System.out.println("Preparando la cantidad de " + archivos.length + " archivos");
             
             for (File f : archivos) {
-            lector.leerArchivo(f, indice);
+		lector.leerArchivo(f, indice);
             }
             System.out.println("Archivos procesados de manera exitosa");
         } else {
@@ -40,26 +46,33 @@ public class Controlador {
 	
     /////// Faltan cosas no se si esten bien
     public void empiezaBusqueda() {
-        // El string para ir buscando, pero despues de la normalizacion y limpieza
-        String s = recibeConsulta();
 
-        // Separamos el string en un arreglo de palabaras, spearando por espacios en
-        // blanco => Adrian/Pro/Gamer => [Adrian, Pro, Gamer] 
-        String[] palabras = s.split("\\s+");
-
-        for (String p : palabras) {
-            if (!p.isEmpty()) {
-            // Este es un consejo que me dio el profe para que vean que se esta buscando
+	// El string para ir buscando, pero despues de la normalizacion y limpieza
+	String s = recibeConsulta();
+	// Separamos el string en un arreglo de palabaras, spearando por espacios en
+        // blanco => Adrian/Pro/Gamer => [Adrian, Pro, Gamer]
+	String[] palabras = s.split("\\s+");
+	
+    // Primero imprimimos qué se está buscando
+	for (String p : palabras)
+	    if (!p.isEmpty())
+	    // Este es un consejo que me dio el profe para que vean que se esta buscando
             // la palabra ya limpia, si el usuario mete "*&^%&**Hola", se impirimira
             // Buscando: "hola", porque asi depura el metodo normalizar
-                System.out.println("Buscando: " + p);
-
-            // cositas
-            }
-        }
+		System.out.println("Buscando: " + p);
+    
+	ListaLigada<ResultadoBusqueda> resultados =
+	    filtro.procesarBusqueda(palabras, indice, totalArchivos);
 	
+	if (resultados == null || !resultados.iterator().hasNext()) {
+	    System.out.println("Sin resultados.");
+	} else {
+	    for (ResultadoBusqueda r : resultados)
+		// Estaba viendo si printf hace las cosas bonitas en la terminal, creo qeu si
+		System.out.printf("%-30s peso: %.4f%n", r.documento.getName(), r.valorFinal);
+	}
     }
-
+    
     public String recibeRuta() {
 	String ruta = "";
 

@@ -1,1 +1,0 @@
-El análisis de datos es crucial para la toma de decisiones en empresas modernas. Herramientas como Python y R son ampliamente utilizadas en este campo.

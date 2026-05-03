@@ -1,1 +1,0 @@
-El desarrollo de software incluye etapas como análisis, diseño, implementación y pruebas. Metodologías ágiles como Scrum son muy utilizadas actualmente.

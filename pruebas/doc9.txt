@@ -1,0 +1,1 @@
+La minería de datos implica extraer conocimiento útil a partir de grandes conjuntos de datos. Es utilizada en marketing, finanzas y detección de fraudes.

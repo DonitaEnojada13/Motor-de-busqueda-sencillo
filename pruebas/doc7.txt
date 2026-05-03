@@ -1,0 +1,1 @@
+Las redes neuronales están inspiradas en el cerebro humano y se utilizan para tareas complejas como reconocimiento de imágenes y procesamiento de voz.

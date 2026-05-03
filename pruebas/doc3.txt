@@ -1,0 +1,1 @@
+El procesamiento de lenguaje natural permite a las computadoras entender y generar lenguaje humano. Es fundamental en aplicaciones como chatbots y traductores automáticos.

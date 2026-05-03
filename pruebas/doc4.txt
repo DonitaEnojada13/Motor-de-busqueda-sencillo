@@ -1,0 +1,1 @@
+Los algoritmos de aprendizaje supervisado requieren datos etiquetados para entrenar modelos. Ejemplos incluyen regresión lineal y máquinas de soporte vectorial.

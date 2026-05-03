@@ -138,8 +138,6 @@ public class Controlador {
 		    stb.append(Character.toLowerCase(c));
             // para meterle un espacio y tener jaimito111 pro, mas palabras pero creo que funciona
 	    
-            // ***Ver que hacer si tenemos "Hola /mundo" == "hola  mundo" dos espacios?
-            else stb.append(' ');
         }
         return stb.toString();
     }

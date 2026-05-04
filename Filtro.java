@@ -69,7 +69,7 @@ public class Filtro{
 
     public void preCalcularNormas(ArbolBinarioRojinegro<String> busqueda, int total){
         this.listaNormas = new ListaLigada<>();
-        busqueda.calcularNormas(listaNormas, total);
+        busqueda.calcularNormas(this.listaNormas, total);
     }
 
     private void actualizarLista(ListaLigada<ResultadoBusqueda> lista, File doc, double score){

@@ -118,6 +118,43 @@ public class ArbolBinarioRojinegro<T extends Comparable<T>> implements Procesado
 		return listaConDatos;
 	}
 
+	//Método para tener la norma y que la complejidad del programa no crezca :z
+	public void calcularNormas(ListaLigada<NormaDoc> listaNormas, int totalDocs) {
+    	recorrerParaNormas(raiz, listaNormas, totalDocs);
+	}
+
+	private void recorrerParaNormas(VerticeRn nodo, ListaLigada<NormaDoc> listaNormas, int totalDocs){
+		if(nodo == null) return;
+
+		int docsConPalabras = 0;
+		for(Conteo c : nodo.archivos) docsConPalabras++;
+
+		double idf = new Peso().calcularIDF(totalDocs, docsConPalabras);
+
+		for(Conteo c : nodo.archivos){
+			double tf = new Peso().calcularTF(c.aparicion);
+			double peso = tf * idf;
+
+			boolean encontrado = false;
+			for(NormaDoc n : listaNormas){
+				if(n.archivo.equals(c.documento)){
+					n.sumaCuadrados += (peso*peso);				
+					encontrado = true;
+					break;
+				}
+			}
+
+			if(!encontrado){
+				NormaDoc nuevo = new NormaDoc(c.documento);
+				nuevo.sumaCuadrados = (peso*peso);
+				listaNormas.agregarFinal(nuevo);
+			}
+		}
+
+		recorrerParaNormas(nodo.izquierdo, listaNormas, totalDocs);
+		recorrerParaNormas(nodo.derecho, listaNormas, totalDocs);
+	}
+
     // metodo agregado de emergencia, para que la clase lista sepa que agregar
     public void setArchivoActual(File archivo) {
 	this.archivoActual = archivo;

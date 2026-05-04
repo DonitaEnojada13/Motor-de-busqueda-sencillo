@@ -3,9 +3,11 @@ import java.util.Iterator;
 
 public class Filtro{
     private Peso calcularPeso;
+    private ListaLigada<NormaDoc> listaNormas;
 
     public Filtro(){
         this.calcularPeso = new Peso();
+        this.listaNormas = new ListaLigada<>();
     }
 
     /**
@@ -40,6 +42,14 @@ public class Filtro{
             }
         }
 
+        for(ResultadoBusqueda res : resultadoFiltrados){
+            for(NormaDoc norma : this.listaNormas){
+                if(res.documento.equals(norma.archivo)){
+                    res.valorFinal = calcularPeso.calcularSim(res.valorFinal, norma.sumaCuadrados);
+                }
+            }
+        }
+
         QuickSort ordenador = new QuickSort();
         resultadoFiltrados = ordenador.ordenar(resultadoFiltrados);
 
@@ -57,6 +67,11 @@ public class Filtro{
         return topBusquedas;
     }
 
+    public void preCalcularNormas(ArbolBinarioRojinegro<String> busqueda, int total){
+        this.listaNormas = new ListaLigada<>();
+        busqueda.calcularNormas(listaNormas, total);
+    }
+
     private void actualizarLista(ListaLigada<ResultadoBusqueda> lista, File doc, double score){
         
         for(ResultadoBusqueda res : lista){
@@ -68,6 +83,8 @@ public class Filtro{
 
         lista.agregarFinal(new ResultadoBusqueda(doc, score));
     }
+
+
 
     //Aquí mejor creo una nueva clase privada para el quicksort, estaba viendo que se puede hacer directamente con las listas ligadas
     //Creamos dos y de ahí las vamos acomodando con recursion wacha

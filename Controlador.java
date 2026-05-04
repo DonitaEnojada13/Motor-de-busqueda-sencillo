@@ -21,8 +21,8 @@ public class Controlador {
         this.sc = new Scanner(System.in);
         this.indice = new ArbolBinarioRojinegro<>();
         this.lector = new LectorArchivo();
-	this.filtro = new Filtro();
-	this.totalArchivos = 0;
+        this.filtro = new Filtro();
+        this.totalArchivos = 0;
 	
     }
     
@@ -31,14 +31,19 @@ public class Controlador {
 	
         if (lectorRuta.esUsable()) {
             File[] archivos = lectorRuta.listadoDocs();
-	    totalArchivos = archivos.length;
+	        totalArchivos = archivos.length;
             
             System.out.println("Preparando la cantidad de " + archivos.length + " archivos");
             
             for (File f : archivos) {
-		lector.leerArchivo(f, indice);
+		        lector.leerArchivo(f, indice);
             }
             System.out.println("Archivos procesados de manera exitosa");
+            
+            System.out.println("Calculando el peso de los documentos (Normas) ... ");
+            filtro.preCalcularNormas(indice, totalArchivos);
+            System.out.println("!TODO LISTOOOO!");
+
         } else {
             System.err.println("La ruta no es valida o no es un directorio");
         }
@@ -54,15 +59,17 @@ public class Controlador {
 	String[] palabras = s.split("\\s+");
 	
     // Primero imprimimos qué se está buscando
-	for (String p : palabras)
-	    if (!p.isEmpty())
+	for (String p : palabras){
+	    if (!p.isEmpty()){
 	    // Este es un consejo que me dio el profe para que vean que se esta buscando
             // la palabra ya limpia, si el usuario mete "*&^%&**Hola", se impirimira
             // Buscando: "hola", porque asi depura el metodo normalizar
 		System.out.println("Buscando: " + p);
-    
-	ListaLigada<ResultadoBusqueda> resultados =
-	    filtro.procesarBusqueda(palabras, indice, totalArchivos);
+
+        }
+    }
+
+	ListaLigada<ResultadoBusqueda> resultados = filtro.procesarBusqueda(palabras, indice, totalArchivos);
 	
 	if (resultados == null || !resultados.iterator().hasNext()) {
 	    System.out.println("Sin resultados.");

@@ -19,8 +19,13 @@ public class Peso {
 	return tf*idf;
     }
 
-    public double calcularSim(double numerador, double denominador){
-        return 0.0;
+    public double calcularSim(double numerador, double sumaCuadrados){
+
+        if(sumaCuadrados <= 0) return 0.0;
+
+        double denominador = Math.sqrt(sumaCuadrados);
+
+        return numerador / denominador;
     }
     
     private double log2(double num) {
@@ -28,5 +33,5 @@ public class Peso {
 	    throw new IllegalArgumentException("Aqui no trabajamos con infinitos");
 	return Math.log(num)/Math.log(2);
     }
-    
+
 }

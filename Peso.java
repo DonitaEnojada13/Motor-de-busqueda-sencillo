@@ -14,8 +14,13 @@ public class Peso {
 	    return log2((double)(totalDocs + 1)/relativoDocs);
 	return 0.0;
     }
+
     public double calcularPeso(double tf, double idf) {
 	return tf*idf;
+    }
+
+    public double calcularSim(double numerador, double denominador){
+        return 0.0;
     }
     
     private double log2(double num) {
@@ -23,6 +28,5 @@ public class Peso {
 	    throw new IllegalArgumentException("Aqui no trabajamos con infinitos");
 	return Math.log(num)/Math.log(2);
     }
-
     
 }

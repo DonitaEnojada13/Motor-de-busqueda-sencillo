@@ -43,7 +43,18 @@ public class Filtro{
         QuickSort ordenador = new QuickSort();
         resultadoFiltrados = ordenador.ordenar(resultadoFiltrados);
 
-        return resultadoFiltrados;
+        ListaLigada<ResultadoBusqueda> topBusquedas = new ListaLigada<>();
+        int contador = 0;
+        for(ResultadoBusqueda r : resultadoFiltrados){
+            if(contador >= 10) break;
+
+            if(r.valorFinal > 0){
+                topBusquedas.agregarFinal(r);
+                contador++;
+            }
+        }
+
+        return topBusquedas;
     }
 
     private void actualizarLista(ListaLigada<ResultadoBusqueda> lista, File doc, double score){

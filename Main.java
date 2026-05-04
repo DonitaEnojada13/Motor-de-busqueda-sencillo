@@ -16,14 +16,21 @@ public class Main {
 	}
 	
 	String seguir = "s";
-	while (seguir.equals("s")) {
+	while (!seguir.equals("n")) {
 	    try {
 		controlador.empiezaBusqueda();
 	    } catch (Exception e) {
 		System.err.println("Error en la busqueda: " + e.getMessage());
 	    }
-	    System.out.print("Deseas buscar otra palabra? (s/n): ");
-	    seguir = sc.nextLine().trim().toLowerCase();
+
+		do{
+			System.out.print("Deseas buscar otra palabra? (s/n): ");
+	    	seguir = sc.nextLine().trim().toLowerCase();
+			if(!seguir.equals("s") && !seguir.equals("n")){
+				System.out.println("ESCRIBE 's' o 'n' plox :)) ");
+			}
+		}while(!seguir.equals("s") && !seguir.equals("n"));
+		
 	}
 	
 	System.out.println("Bye bye");
